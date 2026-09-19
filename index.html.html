@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShelfLeap — The Independent Retail Launchpad</title>
+<meta name="description" content="ShelfLeap connects indie and NPD brands with independent retailers through verified discovery, sampling, feedback and B2B ordering.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#F26522; --orange-600:#D9541A; --orange-50:#FFF4EE; --orange-100:#FFE6D9;
+  --ink:#0E1726; --body:#475467; --muted:#667085;
+  --line:#E7EAEF; --line-soft:#F1F3F6;
+  --surface:#FFFFFF; --surface-2:#FAFBFC; --green:#12A150;
+  --radius:14px; --radius-lg:20px;
+  --shadow-sm:0 1px 2px rgba(16,24,40,.05);
+  --shadow:0 4px 16px rgba(16,24,40,.06);
+  --shadow-lg:0 12px 40px rgba(16,24,40,.09);
+  --font:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--surface);color:var(--body);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+img,svg{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4,h5{margin:0;color:var(--ink);font-weight:700;letter-spacing:-.022em;line-height:1.18;}
+p{margin:0;}
+ul{margin:0;padding:0;list-style:none;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font);font-size:15px;font-weight:600;padding:12px 22px;border-radius:10px;border:1.5px solid transparent;cursor:pointer;transition:background .18s,border-color .18s,color .18s,transform .12s,box-shadow .18s;white-space:nowrap;}
+.btn:active{transform:translateY(1px);}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 2px 10px rgba(242,101,34,.25);}
+.btn-primary:hover{background:var(--orange-600);box-shadow:0 6px 18px rgba(242,101,34,.3);}
+.btn-ghost{background:#fff;color:var(--ink);border-color:var(--line);}
+.btn-ghost:hover{border-color:var(--orange);color:var(--orange);}
+.btn-white{background:#fff;color:var(--ink);}
+.btn-white:hover{background:var(--orange-50);color:var(--orange-600);}
+.btn-sm{padding:9px 16px;font-size:14px;}
+.btn-lg{padding:14px 28px;font-size:16px;}
+
+.topbar{background:var(--ink);color:#fff;font-size:13.5px;text-align:center;padding:9px 16px;}
+.topbar b{color:#FFB48A;}
+header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.93);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line);}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 24px;max-width:var(--maxw);margin:0 auto;}
+.brand{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:800;color:var(--ink);letter-spacing:-.03em;}
+.brand .mark{width:30px;height:30px;border-radius:8px;background:var(--orange);display:grid;place-items:center;color:#fff;font-size:16px;font-weight:800;box-shadow:0 2px 8px rgba(242,101,34,.3);}
+.navlinks{display:flex;gap:28px;font-size:15px;font-weight:500;color:var(--body);}
+.navlinks a{transition:color .15s;padding:4px 0;border-bottom:2px solid transparent;}
+.navlinks a:hover{color:var(--orange);}
+.navlinks a.on{color:var(--orange);border-bottom-color:var(--orange);font-weight:600;}
+.navactions{display:flex;gap:10px;align-items:center;}
+.burger{display:none;background:none;border:1px solid var(--line);border-radius:9px;padding:7px 10px;cursor:pointer;}
+.burger span{display:block;width:18px;height:2px;background:var(--ink);margin:3.5px 0;border-radius:2px;}
+.mobilemenu{display:none;border-top:1px solid var(--line);background:#fff;padding:10px 24px 18px;}
+.mobilemenu.open{display:block;}
+.mobilemenu a{display:block;padding:11px 0;border-bottom:1px solid var(--line-soft);font-weight:500;}
+.mobilemenu .btn{width:100%;margin-top:14px;}
+
+section{padding:84px 0;}
+.alt{background:var(--surface-2);}
+.eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);background:var(--orange-50);padding:6px 13px;border-radius:99px;margin-bottom:16px;}
+h2.title{font-size:clamp(28px,3.6vw,42px);max-width:20ch;}
+.center{text-align:center;}
+.center h2.title,.center .sub{margin-left:auto;margin-right:auto;}
+.sub{font-size:17px;color:var(--muted);max-width:62ch;margin-top:14px;}
+
+/* page header (inner pages) */
+.pagehead{padding:64px 0 52px;background:radial-gradient(800px 340px at 82% 10%,var(--orange-50) 0%,transparent 62%),linear-gradient(180deg,#fff,#FDFBF9);border-bottom:1px solid var(--line);}
+.pagehead h1{font-size:clamp(32px,4.4vw,48px);letter-spacing:-.035em;max-width:16ch;}
+.pagehead .lede{font-size:18px;margin-top:16px;max-width:56ch;}
+.crumb{font-size:13.5px;color:var(--muted);margin-bottom:14px;}
+.crumb a:hover{color:var(--orange);}
+
+/* hero */
+.hero{padding:72px 0 80px;background:radial-gradient(900px 420px at 88% 8%,var(--orange-50) 0%,transparent 65%),linear-gradient(180deg,#fff 0%,#FDFBF9 100%);}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+.hero h1{font-size:clamp(36px,5vw,56px);letter-spacing:-.035em;line-height:1.08;}
+.hero h1 .accent{color:var(--orange);}
+.hero .lede{font-size:18px;margin-top:20px;max-width:47ch;color:var(--body);}
+.hero-cta{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;}
+.hero-note{display:flex;gap:22px;margin-top:26px;flex-wrap:wrap;font-size:14px;color:var(--muted);}
+.hero-note span{display:flex;align-items:center;gap:7px;}
+.tick{width:17px;height:17px;border-radius:50%;background:var(--orange-100);color:var(--orange-600);display:grid;place-items:center;font-size:10px;font-weight:800;}
+.hero-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:26px;}
+.hc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.hc-head h4{font-size:15px;}
+.chip{font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--orange-50);color:var(--orange-600);}
+.journey li{display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid var(--line-soft);font-size:14.5px;color:var(--ink);font-weight:500;}
+.journey li:last-child{border-bottom:none;}
+.jnum{width:26px;height:26px;border-radius:8px;flex-shrink:0;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--orange-50);color:var(--orange-600);}
+.journey li.done .jnum{background:var(--orange);color:#fff;}
+
+.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff;padding:0;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+.stat{padding:30px 24px;text-align:center;border-right:1px solid var(--line);}
+.stat:last-child{border-right:none;}
+.stat .n{font-size:32px;font-weight:800;color:var(--ink);letter-spacing:-.03em;}
+.stat .n em{font-style:normal;color:var(--orange);}
+.stat .l{font-size:13.5px;color:var(--muted);margin-top:4px;}
+
+.cards{display:grid;gap:22px;margin-top:46px;}
+.g2{grid-template-columns:repeat(2,1fr);}
+.g3{grid-template-columns:repeat(3,1fr);}
+.g4{grid-template-columns:repeat(4,1fr);}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-sm);transition:box-shadow .2s,border-color .2s,transform .2s;}
+.card:hover{box-shadow:var(--shadow);border-color:var(--orange-100);transform:translateY(-2px);}
+.card h3{font-size:18px;margin-bottom:8px;}
+.card p{font-size:14.8px;color:var(--muted);}
+.icon{width:44px;height:44px;border-radius:11px;background:var(--orange-50);color:var(--orange);display:grid;place-items:center;margin-bottom:16px;}
+.icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;}
+
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:46px;}
+.side{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);}
+.side-head{padding:24px 28px;border-bottom:1px solid var(--line);}
+.side-head h3{font-size:20px;}
+.side-head p{font-size:14px;color:var(--muted);margin-top:4px;}
+.side.brandside .side-head{background:var(--orange-50);}
+.side.retailside .side-head{background:var(--surface-2);}
+.side ol{counter-reset:s;padding:10px 28px 24px;}
+.side ol li{counter-increment:s;display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:15px;color:var(--ink);font-weight:500;}
+.side ol li:last-child{border-bottom:none;}
+.side ol li::before{content:counter(s);width:24px;height:24px;border-radius:7px;flex-shrink:0;display:grid;place-items:center;font-size:11.5px;font-weight:700;background:var(--orange-50);color:var(--orange-600);}
+.side.retailside ol li::before{background:#EEF1F4;color:var(--body);}
+
+.flow{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:52px;position:relative;}
+.flow::before{content:"";position:absolute;top:24px;left:7%;right:7%;height:2px;background:var(--line);}
+.fnode{text-align:center;padding:0 6px;position:relative;}
+.fcircle{width:48px;height:48px;border-radius:14px;margin:0 auto 14px;position:relative;z-index:2;background:#fff;border:1.5px solid var(--line);display:grid;place-items:center;color:var(--orange);box-shadow:var(--shadow-sm);}
+.fnode:nth-child(-n+3) .fcircle{background:var(--orange);border-color:var(--orange);color:#fff;}
+.fcircle svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;}
+.fnode h5{font-size:14px;margin-bottom:3px;}
+.fnode p{font-size:12.5px;color:var(--muted);line-height:1.4;}
+
+.tabbar{display:flex;gap:8px;justify-content:center;margin-top:36px;flex-wrap:wrap;}
+.tab{background:#fff;border:1px solid var(--line);color:var(--body);font-family:var(--font);font-size:14.5px;font-weight:600;padding:10px 20px;border-radius:99px;cursor:pointer;transition:all .18s;}
+.tab.active{background:var(--orange);border-color:var(--orange);color:#fff;box-shadow:0 3px 12px rgba(242,101,34,.25);}
+.panel{display:none;margin-top:30px;}
+.panel.active{display:block;}
+.app{display:grid;grid-template-columns:210px 1fr;background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);min-height:380px;}
+.appnav{background:var(--surface-2);border-right:1px solid var(--line);padding:18px 0;}
+.appnav .u{display:flex;align-items:center;gap:9px;padding:0 18px 16px;margin-bottom:8px;border-bottom:1px solid var(--line);}
+.avatar{width:30px;height:30px;border-radius:9px;background:var(--orange);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700;flex-shrink:0;}
+.appnav .u div{font-size:12.5px;line-height:1.3;}
+.appnav .u b{display:block;font-size:13.5px;color:var(--ink);}
+.appnav .it{padding:9px 18px;font-size:13.5px;color:var(--muted);font-weight:500;border-left:2.5px solid transparent;}
+.appnav .it.on{color:var(--orange-600);background:var(--orange-50);border-left-color:var(--orange);font-weight:600;}
+.appmain{padding:24px 26px;}
+.appmain h4{font-size:16px;margin-bottom:16px;}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.kpi{border:1px solid var(--line);border-radius:11px;padding:14px 16px;background:#fff;}
+.kpi .n{font-size:22px;font-weight:800;color:var(--ink);}
+.kpi .l{font-size:12px;color:var(--muted);margin-top:2px;}
+.kpi .d{font-size:11.5px;color:var(--green);font-weight:600;margin-top:5px;}
+.tbl{border:1px solid var(--line);border-radius:11px;overflow:hidden;}
+.tr{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:11px 16px;font-size:13.5px;border-bottom:1px solid var(--line-soft);align-items:center;}
+.tr:last-child{border-bottom:none;}
+.tr.th{background:var(--surface-2);font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;}
+.tag.ok{background:#E7F7EE;color:var(--green);}
+.tag.warn{background:var(--orange-50);color:var(--orange-600);}
+.tag.gray{background:#F0F2F5;color:var(--muted);}
+.pcards{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.pcard{border:1px solid var(--line);border-radius:11px;padding:15px;}
+.pcard .t{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.pcard h5{font-size:14.5px;}
+.pcard .m{font-size:12px;color:var(--muted);margin:3px 0 9px;}
+.pcard .pr{font-size:13.5px;font-weight:700;color:var(--ink);}
+.pcard .pr s{color:var(--muted);font-weight:500;font-size:12px;}
+.pcard .fit{font-size:11.5px;color:var(--orange-600);background:var(--orange-50);padding:5px 9px;border-radius:7px;margin-top:10px;}
+
+.mkt{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px;}
+.mkt .card .big{font-size:38px;font-weight:800;color:var(--orange);letter-spacing:-.035em;line-height:1;}
+.mkt .card .cap{font-size:15px;font-weight:700;color:var(--ink);margin-top:8px;}
+.mkt .card .src{font-size:12px;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px solid var(--line-soft);}
+.datatable{margin-top:34px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow-sm);}
+.dt-scroll{overflow-x:auto;}
+table{border-collapse:collapse;width:100%;min-width:620px;}
+th,td{text-align:left;padding:13px 20px;font-size:14px;border-bottom:1px solid var(--line-soft);}
+th{background:var(--surface-2);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;}
+td{color:var(--body);}
+td:first-child{font-weight:600;color:var(--ink);}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover{background:#FEFAF7;}
+.footnote{font-size:12.5px;color:var(--muted);margin-top:14px;}
+.footnote a{color:var(--orange-600);text-decoration:underline;}
+
+.road{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px;}
+.rstep{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow-sm);}
+.rstep .bar{height:4px;width:38px;border-radius:99px;background:var(--orange);margin-bottom:14px;}
+.rstep .wk{font-size:12px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.05em;}
+.rstep h5{font-size:16px;margin:6px 0 6px;}
+.rstep p{font-size:13.5px;color:var(--muted);}
+
+/* vision / mission */
+.vm{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px;}
+.vmcard{border-radius:var(--radius-lg);padding:34px;border:1px solid var(--line);}
+.vmcard.vision{background:linear-gradient(140deg,#1A2436,var(--ink));color:rgba(255,255,255,.8);border-color:transparent;}
+.vmcard.vision h3{color:#fff;}
+.vmcard.mission{background:var(--orange-50);border-color:var(--orange-100);}
+.vmcard .lbl{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:12px;}
+.vmcard.vision .lbl{color:#FFB48A;}
+.vmcard h3{font-size:24px;line-height:1.3;margin-bottom:14px;}
+.vmcard p{font-size:15.5px;}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px;}
+.value{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;}
+.value .num{font-size:13px;font-weight:800;color:var(--orange);margin-bottom:10px;}
+.value h4{font-size:17px;margin-bottom:7px;}
+.value p{font-size:14.5px;color:var(--muted);}
+.timeline{margin-top:40px;border-left:2px solid var(--line);padding-left:28px;}
+.tevent{position:relative;padding-bottom:30px;}
+.tevent:last-child{padding-bottom:0;}
+.tevent::before{content:"";position:absolute;left:-36px;top:5px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--orange);}
+.tevent .yr{font-size:12.5px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.05em;}
+.tevent h5{font-size:17px;margin:4px 0 6px;}
+.tevent p{font-size:14.5px;color:var(--muted);max-width:60ch;}
+
+.faq{margin-top:40px;}
+.qa{border-bottom:1px solid var(--line);}
+.qa summary{padding:18px 0;font-size:16.5px;font-weight:600;color:var(--ink);cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;}
+.qa summary::-webkit-details-marker{display:none;}
+.qa summary::after{content:"+";color:var(--orange);font-size:22px;font-weight:400;line-height:1;}
+.qa[open] summary::after{content:"–";}
+.qa p{padding:0 0 20px;font-size:15px;color:var(--muted);max-width:75ch;}
+
+.ctaband{background:linear-gradient(135deg,#1A2436 0%,var(--ink) 100%);border-radius:24px;padding:52px;color:#fff;display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center;position:relative;overflow:hidden;}
+.ctaband::after{content:"";position:absolute;right:-90px;top:-90px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(242,101,34,.28),transparent 68%);}
+.ctaband h2{color:#fff;font-size:clamp(26px,3.2vw,36px);}
+.ctaband p{color:rgba(255,255,255,.75);margin-top:14px;font-size:16.5px;max-width:44ch;}
+.formcard{background:#fff;border-radius:16px;padding:26px;position:relative;z-index:2;box-shadow:var(--shadow-lg);}
+.frow{margin-bottom:14px;}
+.frow label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.frow input,.frow select{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;font-family:var(--font);font-size:14.5px;color:var(--ink);background:#fff;transition:border-color .15s,box-shadow .15s;}
+.frow input:focus,.frow select:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-100);}
+.toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.toggle label{border:1.5px solid var(--line);border-radius:10px;padding:10px;text-align:center;cursor:pointer;font-size:14px;font-weight:600;color:var(--body);transition:all .15s;margin:0;}
+.toggle input{position:absolute;opacity:0;pointer-events:none;}
+.toggle label.sel{border-color:var(--orange);background:var(--orange-50);color:var(--orange-600);}
+.formcard .btn{width:100%;margin-top:6px;}
+.formnote{font-size:11.5px;color:var(--muted);text-align:center;margin-top:12px;}
+.success{display:none;text-align:center;padding:18px 6px;}
+.success.show{display:block;}
+.success .ring{width:52px;height:52px;border-radius:50%;background:#E7F7EE;color:var(--green);display:grid;place-items:center;margin:0 auto 14px;font-size:24px;}
+.success h4{font-size:18px;margin-bottom:6px;}
+.success p{font-size:14px;color:var(--muted);}
+.formcard form.hide{display:none;}
+
+footer{background:var(--ink);color:rgba(255,255,255,.62);padding:56px 0 28px;font-size:14px;}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;}
+footer .brand{color:#fff;}
+footer .fabout{font-size:14px;margin-top:14px;max-width:34ch;}
+footer h6{color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 14px;font-weight:700;}
+footer li{padding:5px 0;}
+footer li a:hover{color:var(--orange);}
+.fbot{border-top:1px solid rgba(255,255,255,.1);margin-top:40px;padding-top:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;}
+
+.page{display:none;}
+.page.show{display:block;}
+
+@media (max-width:1000px){
+  .g4{grid-template-columns:repeat(2,1fr);}
+  .road{grid-template-columns:repeat(2,1fr);}
+  .mkt,.values{grid-template-columns:1fr;}
+  .ctaband{grid-template-columns:1fr;padding:38px;}
+  .vm{grid-template-columns:1fr;}
+}
+@media (max-width:860px){
+  section{padding:60px 0;}
+  .navlinks,.navactions{display:none;}
+  .burger{display:block;}
+  .hero-grid,.sides,.g2,.g3{grid-template-columns:1fr;}
+  .hero{padding:52px 0 60px;}
+  .flow{grid-template-columns:repeat(2,1fr);row-gap:28px;}
+  .flow::before{display:none;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .stat:nth-child(2){border-right:none;}
+  .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line);}
+  .app{grid-template-columns:1fr;}
+  .appnav{border-right:none;border-bottom:1px solid var(--line);display:flex;overflow-x:auto;padding:10px;gap:4px;}
+  .appnav .u{display:none;}
+  .appnav .it{white-space:nowrap;border-left:none;border-radius:8px;padding:8px 13px;}
+  .appnav .it.on{border-left:none;}
+  .kpis,.pcards{grid-template-columns:1fr;}
+  .tr{grid-template-columns:1.6fr 1fr 1fr;}
+  .tr div:nth-child(2){display:none;}
+  .fgrid{grid-template-columns:1fr 1fr;gap:28px;}
+  .road{grid-template-columns:1fr;}
+}
+@media (max-width:480px){
+  .stats-grid{grid-template-columns:1fr;}
+  .stat{border-right:none;border-bottom:1px solid var(--line);}
+  .fgrid{grid-template-columns:1fr;}
+  .ctaband{padding:28px 22px;}
+  .vmcard{padding:26px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">Pilot cohort open in Ahmedabad — <b>free Innovation Box</b> for the first 30 retailers.</div>
+
+<header>
+  <div class="nav">
+    <a href="#/" class="brand"><span class="mark">S</span>ShelfLeap</a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#/" data-r="/">Home</a>
+      <a href="#/brands" data-r="/brands">For Brands</a>
+      <a href="#/retailers" data-r="/retailers">For Retailers</a>
+      <a href="#/platform" data-r="/platform">Platform</a>
+      <a href="#/market" data-r="/market">Market</a>
+      <a href="#/about" data-r="/about">About</a>
+    </nav>
+    <div class="navactions">
+      <a href="#/retailers" class="btn btn-ghost btn-sm">For Retailers</a>
+      <a href="#/join" class="btn btn-primary btn-sm">Submit Your Product</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobilemenu" id="mobilemenu">
+    <a href="#/">Home</a>
+    <a href="#/brands">For Brands</a>
+    <a href="#/retailers">For Retailers</a>
+    <a href="#/platform">Platform</a>
+    <a href="#/market">Market</a>
+    <a href="#/about">About</a>
+    <a href="#/join" class="btn btn-primary">Submit Your Product</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HOME ============ -->
+<div class="page show" id="page-/">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">The Independent Retail Launchpad</span>
+        <h1>Give your brand<br>a <span class="accent">shelf.</span></h1>
+        <p class="lede">ShelfLeap connects indie and NPD brands with independent retailers through verified discovery, curated sampling, structured feedback and B2B ordering — so new products get tested on real shelves, and retailers stop guessing what to stock.</p>
+        <div class="hero-cta">
+          <a href="#/brands" class="btn btn-primary btn-lg">I'm a Brand</a>
+          <a href="#/retailers" class="btn btn-ghost btn-lg">I'm a Retailer</a>
+        </div>
+        <div class="hero-note">
+          <span><i class="tick">✓</i> Free for pilot retailers</span>
+          <span><i class="tick">✓</i> Verified brands only</span>
+          <span><i class="tick">✓</i> No shelf-space risk</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hc-head"><h4>One complete journey</h4><span class="chip">Live pilot</span></div>
+        <ul class="journey">
+          <li class="done"><span class="jnum">1</span>Brand submits &amp; gets verified</li>
+          <li class="done"><span class="jnum">2</span>Matched with the right retailers</li>
+          <li class="done"><span class="jnum">3</span>Innovation Box sampled in-store</li>
+          <li><span class="jnum">4</span>Retailer gives structured feedback</li>
+          <li><span class="jnum">5</span>First B2B order placed</li>
+          <li><span class="jnum">6</span>Retailer reorders what sells</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="wrap stats-grid">
+      <div class="stat"><div class="n"><em>13M</em></div><div class="l">Kirana &amp; neighbourhood stores in India</div></div>
+      <div class="stat"><div class="n"><em>1.59L+</em></div><div class="l">DPIIT-recognised startups</div></div>
+      <div class="stat"><div class="n"><em>1.85L</em></div><div class="l">New companies registered in FY24</div></div>
+      <div class="stat"><div class="n"><em>~11%</em></div><div class="l">Of India's GDP from retail</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="center">
+        <span class="eyebrow">The problem</span>
+        <h2 class="title">Two risks nobody has solved</h2>
+        <p class="sub">Thousands of new Indian brands launch every year. Millions of independent stores could stock them. Almost nothing connects the two.</p>
+      </div>
+      <div class="cards g2">
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>For indie brands</h3>
+          <p>Getting a first meeting with a retailer is slow and unpredictable. There's no standard way to pitch a product, prove it deserves shelf space, or get it in front of stores that actually fit the brand's category, price point and city.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 9l1.5-5h15L21 9M3 9h18v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9zM9 13h6"/></svg></div>
+          <h3>For independent retailers</h3>
+          <p>Shelf space is limited and every unknown product is a bet. Without a way to sample it, see customer reaction and gather feedback first, trying something new means real financial risk on every single order.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="center">
+        <span class="eyebrow">How it works</span>
+        <h2 class="title">Discovery → Trial → Purchase → Repeat</h2>
+        <p class="sub">The same seven-step loop every brand and retailer moves through on ShelfLeap.</p>
+      </div>
+      <div class="flow">
+        <div class="fnode"><div class="fcircle"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div><h5>Submit</h5><p>Brand registers &amp; lists</p></div>
+        <div class="fnode"><div class="fcircle"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/></svg></div><h5>Verify</h5><p>ShelfLeap Verified</p></div>
+        <div class="fnode"><div class="fcircle"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><h5>Match</h5><p>Category, city, price</p></div>
+        <div class="fnode"><div class="fcircle"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8"/></svg></div><h5>Sample</h5><p>Innovation Box</p></div>
+        <div class="fnode"><div class="fcircle"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8L12 3z"/></svg></div><h5>Feedback</h5><p>Rated on 4 criteria</p></div>
+        <div class="fnode"><div class="fcircle"><svg viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-12zM6 6L5 2H2M8 21a1 1 0 100-2 1 1 0 000 2zM18 21a1 1 0 100-2 1 1 0 000 2z"/></svg></div><h5>Order</h5><p>First B2B order</p></div>
+        <div class="fnode"><div class="fcircle"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7M21 3v6h-6"/></svg></div><h5>Reorder</h5><p>What sells, restocks</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="center">
+        <span class="eyebrow">Two-sided platform</span>
+        <h2 class="title">Built for both sides of the shelf</h2>
+        <p class="sub">Every action on one side unlocks an action on the other. That's the whole product.</p>
+      </div>
+      <div class="sides">
+        <div class="side brandside">
+          <div class="side-head"><h3>Brand side</h3><p>Indie entrepreneurs &amp; NPD brands</p></div>
+          <ol><li>Register brand</li><li>Submit product</li><li>Get verified</li><li>Send samples</li><li>Receive feedback</li><li>Get B2B orders</li><li>Track repeat orders</li></ol>
+        </div>
+        <div class="side retailside">
+          <div class="side-head"><h3>Retailer side</h3><p>Independent &amp; premium kirana stores</p></div>
+          <ol><li>Register store</li><li>Set category &amp; preferences</li><li>Discover curated brands</li><li>Receive Innovation Box</li><li>Test products in-store</li><li>Place B2B orders</li><li>Reorder what sells</li></ol>
+        </div>
+      </div>
+      <div class="center" style="margin-top:38px;">
+        <a href="#/platform" class="btn btn-ghost">Explore the platform →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ FOR BRANDS ============ -->
+<div class="page" id="page-/brands">
+  <section class="pagehead">
+    <div class="wrap">
+      <div class="crumb"><a href="#/">Home</a> / For Brands</div>
+      <span class="eyebrow">For indie &amp; NPD brands</span>
+      <h1>From founder's kitchen to a real shelf.</h1>
+      <p class="lede">You've built the product. ShelfLeap gives you a structured path to get it tested by real retailers — without cold calls, distributor gatekeeping or guessing which stores are a fit.</p>
+      <div class="hero-cta"><a href="#/join" class="btn btn-primary btn-lg">Submit Your Product</a><a href="#/platform" class="btn btn-ghost btn-lg">See the dashboard</a></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Your journey</span><h2 class="title">Seven steps from submission to reorder</h2></div>
+      <div class="cards g3">
+        <div class="card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div><h3>1. Register your brand</h3><p>Brand name, founder, city, website or Instagram, category and SKU count. Takes about five minutes.</p></div>
+        <div class="card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 9h8M8 13h5"/></svg></div><h3>2. Submit your product</h3><p>Product name, type, MRP, wholesale price, MOQ, shelf life, description, images, certifications and sample availability.</p></div>
+        <div class="card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/></svg></div><h3>3. Get verified</h3><p>Our team reviews your submission and awards <b>ShelfLeap Verified</b> status — the signal retailers trust before sampling.</p></div>
+        <div class="card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/></svg></div><h3>4. Send samples</h3><p>Your product joins a curated monthly Innovation Box that goes out to matched retailers. No individual courier chasing.</p></div>
+        <div class="card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8L12 3z"/></svg></div><h3>5. Receive real feedback</h3><p>Retailers rate quality, packaging, price and store fit, then say Yes / Maybe / No with expected monthly quantity.</p></div>
+        <div class="card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-12zM6 6L5 2H2"/></svg></div><h3>6–7. Orders &amp; reorders</h3><p>Interested retailers place B2B wholesale orders at your MOQ. Track which stores reorder — that's your real product-market fit signal.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Why it's different</span><h2 class="title">What you get that cold outreach can't give you</h2></div>
+      <div class="cards g4">
+        <div class="card"><h3 style="font-size:16px;">Verified credibility</h3><p style="margin-top:8px;">A third-party verified badge does more in one line than ten follow-up calls.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Pre-qualified stores</h3><p style="margin-top:8px;">Only retailers whose category, price band and city already match your product see you.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Structured feedback</h3><p style="margin-top:8px;">Not "we'll think about it" — actual ratings on four dimensions plus a stocking decision.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Shared logistics</h3><p style="margin-top:8px;">One box, many brands, many stores. Sampling costs drop dramatically when it's pooled.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Who it's for</span><h2 class="title">Built for brands at this stage</h2></div>
+      <div class="cards g3">
+        <div class="card"><h3>Early D2C brands</h3><p>Selling online, ready to test physical retail without committing to a distributor contract.</p></div>
+        <div class="card"><h3>Micro-production units</h3><p>Small batch food, beverage and wellness makers with limited SKUs and no sales team.</p></div>
+        <div class="card"><h3>NPD launches</h3><p>Established makers launching a new product line that needs shelf validation before scale-up.</p></div>
+      </div>
+      <div class="center" style="margin-top:40px;"><a href="#/join" class="btn btn-primary btn-lg">Join the pilot cohort</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ FOR RETAILERS ============ -->
+<div class="page" id="page-/retailers">
+  <section class="pagehead">
+    <div class="wrap">
+      <div class="crumb"><a href="#/">Home</a> / For Retailers</div>
+      <span class="eyebrow">For independent retailers</span>
+      <h1>Try new products before you buy them.</h1>
+      <p class="lede">Every unknown product on your shelf is a bet. ShelfLeap sends you a curated monthly box of verified new brands to test — free during the pilot — so you only order what your customers actually want.</p>
+      <div class="hero-cta"><a href="#/join" class="btn btn-primary btn-lg">Register Your Store</a><a href="#/platform" class="btn btn-ghost btn-lg">See discovery</a></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">What you get</span><h2 class="title">Zero-risk discovery, on your terms</h2></div>
+      <div class="cards g3">
+        <div class="card"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><h3>Curated discovery</h3><p>You set your categories, price range and store type once. After that you only see brands that fit — never a generic catalogue.</p></div>
+        <div class="card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8"/></svg></div><h3>Monthly Innovation Box</h3><p>About five new products delivered to your store each month. Free for pilot retailers — no commitment, no order required.</p></div>
+        <div class="card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/></svg></div><h3>Verified brands only</h3><p>Every brand is checked before it reaches you. No unverifiable sellers, no phantom suppliers.</p></div>
+        <div class="card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.4l6-.8L12 3z"/></svg></div><h3>Your feedback counts</h3><p>Rate quality, packaging, price and store fit. Brands see it, improve, and your input shapes the next box.</p></div>
+        <div class="card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-12zM6 6L5 2H2"/></svg></div><h3>Simple B2B ordering</h3><p>Liked it? Order directly at wholesale price and MOQ. Clear subtotal, clear shipping, clear status tracking.</p></div>
+        <div class="card"><div class="icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7M21 3v6h-6"/></svg></div><h3>One-tap reorder</h3><p>Your dashboard keeps every past order. Reorder what's moving in a single tap.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Who we're onboarding</span><h2 class="title">Stores in the first cohort</h2><p class="sub">We're starting with 20–30 independent retailers in Ahmedabad.</p></div>
+      <div class="cards g4">
+        <div class="card"><h3 style="font-size:16px;">Premium kiranas</h3><p style="margin-top:8px;">Neighbourhood stores serving customers who look for something beyond the usual national brands.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Organic stores</h3><p style="margin-top:8px;">Health-first retailers whose customers actively seek new clean-label products.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Cafés</h3><p style="margin-top:8px;">Outlets with counter space for beverages, snacks and impulse-buy innovation.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Specialty food stores</h3><p style="margin-top:8px;">Gourmet and regional-specialty shops built on novelty and curation.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Questions</span><h2 class="title">What retailers usually ask</h2></div>
+      <div class="faq">
+        <details class="qa"><summary>Does the Innovation Box cost anything?</summary><p>No. During the pilot, the box is free for selected retailers. We're validating whether sampling converts into real orders before introducing any fee.</p></details>
+        <details class="qa"><summary>Am I obligated to order after sampling?</summary><p>Not at all. You can say Yes, Maybe or No on every product. A "No" with a reason is just as useful to us and to the brand as an order.</p></details>
+        <details class="qa"><summary>Who decides which products I receive?</summary><p>Your own preferences do — category, price range and store type. In the prototype stage, every match is also manually approved before a box ships.</p></details>
+        <details class="qa"><summary>What if a product sells badly?</summary><p>You only bought a sample-tested product at your own chosen quantity, at the brand's MOQ. That's the entire point: the risk moves from your shelf to the sampling stage.</p></details>
+        <details class="qa"><summary>How do payments work?</summary><p>The retailer pays for a B2B order, ShelfLeap records the transaction and its commission, and the brand receives settlement. During the prototype, checkout is a test flow — no live payment gateway.</p></details>
+      </div>
+      <div class="center" style="margin-top:40px;"><a href="#/join" class="btn btn-primary btn-lg">Register your store</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ PLATFORM ============ -->
+<div class="page" id="page-/platform">
+  <section class="pagehead">
+    <div class="wrap">
+      <div class="crumb"><a href="#/">Home</a> / Platform</div>
+      <span class="eyebrow">Inside the product</span>
+      <h1>Three interfaces, one loop.</h1>
+      <p class="lede">A brand dashboard, a retailer dashboard and an admin console — each showing the same journey from a different seat. Prototype screens below use illustrative sample data.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="center">
+        <h2 class="title">Dashboards</h2>
+        <div class="tabbar">
+          <button class="tab active" data-p="brand">Brand Dashboard</button>
+          <button class="tab" data-p="retailer">Retailer Discovery</button>
+          <button class="tab" data-p="admin">Admin Verification</button>
+        </div>
+      </div>
+
+      <div class="panel active" id="p-brand">
+        <div class="app">
+          <div class="appnav">
+            <div class="u"><span class="avatar">AB</span><div><b>Aura Brew</b>Healthy Beverages</div></div>
+            <div class="it on">Dashboard</div><div class="it">My Products</div><div class="it">Verification</div>
+            <div class="it">Sample Campaigns</div><div class="it">Retailer Feedback</div><div class="it">Orders</div><div class="it">Analytics</div>
+          </div>
+          <div class="appmain">
+            <h4>Campaign performance</h4>
+            <div class="kpis">
+              <div class="kpi"><div class="n">18</div><div class="l">Samples sent</div><div class="d">+6 this month</div></div>
+              <div class="kpi"><div class="n">11</div><div class="l">Retailers tested</div><div class="d">61% test rate</div></div>
+              <div class="kpi"><div class="n">6</div><div class="l">Interested retailers</div><div class="d">₹72,000 pipeline</div></div>
+            </div>
+            <div class="tbl">
+              <div class="tr th"><div>Retailer</div><div>Category</div><div>Rating</div><div>Decision</div></div>
+              <div class="tr"><div>Green Basket, Navrangpura</div><div>Beverages</div><div>4.6 / 5</div><div><span class="tag ok">Will stock</span></div></div>
+              <div class="tr"><div>Daily Fresh Mart, Satellite</div><div>Beverages</div><div>4.2 / 5</div><div><span class="tag ok">Will stock</span></div></div>
+              <div class="tr"><div>Corner Pantry, Vastrapur</div><div>Snacks</div><div>3.8 / 5</div><div><span class="tag warn">Maybe</span></div></div>
+              <div class="tr"><div>Urban Organics, Bodakdev</div><div>Organic</div><div>—</div><div><span class="tag gray">Testing</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="p-retailer">
+        <div class="app">
+          <div class="appnav">
+            <div class="u"><span class="avatar">GB</span><div><b>Green Basket</b>Navrangpura</div></div>
+            <div class="it">Dashboard</div><div class="it on">Discover</div><div class="it">Innovation Box</div>
+            <div class="it">My Samples</div><div class="it">Feedback</div><div class="it">Orders</div><div class="it">Reorder</div>
+          </div>
+          <div class="appmain">
+            <h4>Curated for your store · Healthy Snacks + Beverages · ₹50–₹250</h4>
+            <div class="pcards">
+              <div class="pcard"><div class="t"><h5>Aura Brew — Healthy Energy</h5><span class="tag ok">Verified</span></div><div class="m">Beverages · Ahmedabad · MOQ 100</div><div class="pr">₹120 <s>MRP ₹150</s></div><div class="fit">Matches your category &amp; price range</div></div>
+              <div class="pcard"><div class="t"><h5>Millet Crunch Bites</h5><span class="tag ok">Verified</span></div><div class="m">Snacks · Ahmedabad · MOQ 150</div><div class="pr">₹65 <s>MRP ₹90</s></div><div class="fit">Requested by 4 nearby stores</div></div>
+              <div class="pcard"><div class="t"><h5>Cold-Pressed Amla Shot</h5><span class="tag gray">Pending</span></div><div class="m">Beverages · Gandhinagar · MOQ 200</div><div class="pr">₹42 <s>MRP ₹60</s></div><div class="fit">Awaiting verification</div></div>
+              <div class="pcard"><div class="t"><h5>Roasted Chana Trail Mix</h5><span class="tag ok">Verified</span></div><div class="m">Snacks · Ahmedabad · MOQ 120</div><div class="pr">₹78 <s>MRP ₹110</s></div><div class="fit">High repeat rate in your area</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="p-admin">
+        <div class="app">
+          <div class="appnav">
+            <div class="u"><span class="avatar">SL</span><div><b>ShelfLeap</b>Admin</div></div>
+            <div class="it">Dashboard</div><div class="it">Brands</div><div class="it">Retailers</div>
+            <div class="it on">Verification</div><div class="it">Matching</div><div class="it">Innovation Boxes</div><div class="it">Orders</div>
+          </div>
+          <div class="appmain">
+            <h4>Verification queue</h4>
+            <div class="kpis">
+              <div class="kpi"><div class="n">14</div><div class="l">Awaiting review</div></div>
+              <div class="kpi"><div class="n">31</div><div class="l">Verified brands</div><div class="d">+9 this month</div></div>
+              <div class="kpi"><div class="n">5</div><div class="l">Info requested</div></div>
+            </div>
+            <div class="tbl">
+              <div class="tr th"><div>Brand</div><div>City</div><div>SKUs</div><div>Status</div></div>
+              <div class="tr"><div>Aura Brew</div><div>Ahmedabad</div><div>3</div><div><span class="tag ok">Verified</span></div></div>
+              <div class="tr"><div>Millet Crunch Co.</div><div>Ahmedabad</div><div>5</div><div><span class="tag ok">Verified</span></div></div>
+              <div class="tr"><div>Amla Life Foods</div><div>Gandhinagar</div><div>2</div><div><span class="tag warn">Info requested</span></div></div>
+              <div class="tr"><div>Spice Root Naturals</div><div>Surat</div><div>4</div><div><span class="tag gray">In review</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Sampling &amp; matching</span><h2 class="title">Seeing the risk before you take it</h2></div>
+      <div class="cards g2">
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8"/></svg></div>
+          <h3>September Innovation Box</h3>
+          <p>Five curated products delivered together, tracked from creation to doorstep. Free for pilot retailers while conversion is validated.</p>
+          <div class="tbl" style="margin-top:18px;">
+            <div class="tr th" style="grid-template-columns:2fr 1fr;"><div>Box status</div><div>Stage</div></div>
+            <div class="tr" style="grid-template-columns:2fr 1fr;"><div>Box created</div><div><span class="tag ok">Done</span></div></div>
+            <div class="tr" style="grid-template-columns:2fr 1fr;"><div>Picked up</div><div><span class="tag ok">Done</span></div></div>
+            <div class="tr" style="grid-template-columns:2fr 1fr;"><div>In transit</div><div><span class="tag warn">Current</span></div></div>
+            <div class="tr" style="grid-template-columns:2fr 1fr;"><div>Delivered</div><div><span class="tag gray">Pending</span></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+          <h3>The matching engine — v1</h3>
+          <p>No AI on day one. Simple, auditable rules: category + location + price range + store type, with manual approval before anything ships.</p>
+          <div style="margin-top:18px;display:grid;gap:10px;">
+            <div style="border:1px solid var(--line);border-radius:11px;padding:13px 15px;"><div style="font-size:12px;color:var(--muted);">Retailer preference</div><div style="font-weight:600;color:var(--ink);font-size:14.5px;">Healthy Snacks + Beverages · Ahmedabad · ₹50–₹250</div></div>
+            <div style="text-align:center;color:var(--orange);font-size:18px;line-height:1;">↓</div>
+            <div style="border:1px solid var(--line);border-radius:11px;padding:13px 15px;"><div style="font-size:12px;color:var(--muted);">Candidate brand</div><div style="font-weight:600;color:var(--ink);font-size:14.5px;">Aura Brew · Verified · Ahmedabad · ₹120</div></div>
+            <div style="background:var(--orange-50);border-left:3px solid var(--orange);border-radius:8px;padding:12px 14px;font-size:13.5px;color:var(--orange-600);">Verified, in-category, in-budget and local → surfaced to the retailer automatically.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Commercials</span><h2 class="title">How money moves</h2><p class="sub">ShelfLeap is a marketplace facilitator: the retailer pays for the order, the platform records the transaction and its commission, and the brand receives settlement.</p></div>
+      <div class="cards g4">
+        <div class="card"><h3 style="font-size:16px;">Brand → ShelfLeap</h3><p style="margin-top:8px;">Product listing and sample stock for the Innovation Box.</p></div>
+        <div class="card"><h3 style="font-size:16px;">ShelfLeap → Retailer</h3><p style="margin-top:8px;">Curated box, delivered and tracked, free during the pilot.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Retailer → ShelfLeap</h3><p style="margin-top:8px;">Structured feedback, then a B2B wholesale order at MOQ.</p></div>
+        <div class="card"><h3 style="font-size:16px;">ShelfLeap → Brand</h3><p style="margin-top:8px;">Order information and settlement, net of platform commission.</p></div>
+      </div>
+      <p class="footnote" style="margin-top:24px;">Illustrative only: on a ₹10,000 order, a 10% commission would mean ₹1,000 to the platform and ₹9,000 settled to the brand. The actual commission rate will be validated during the pilot. The prototype uses a test checkout — no live payment gateway.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ============ MARKET ============ -->
+<div class="page" id="page-/market">
+  <section class="pagehead">
+    <div class="wrap">
+      <div class="crumb"><a href="#/">Home</a> / Market</div>
+      <span class="eyebrow">Market opportunity</span>
+      <h1>The numbers behind ShelfLeap.</h1>
+      <p class="lede">Every figure below comes from a government or officially-reported source. India creates new brands faster than any structured channel can absorb them — and has more independent stores than anywhere on earth.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="mkt" style="margin-top:0;">
+        <div class="card">
+          <div class="big">13M</div><div class="cap">Kirana &amp; neighbourhood stores</div>
+          <p style="margin-top:8px;font-size:14.5px;">India's unorganised retail segment runs on roughly 13 million small stores, with over 10 million of them in Tier-II cities and smaller towns.</p>
+          <div class="src">Source: Invest India (Govt. of India); AICPDF</div>
+        </div>
+        <div class="card">
+          <div class="big">7.83 Cr</div><div class="cap">MSMEs registered on Udyam</div>
+          <p style="margin-top:8px;font-size:14.5px;">Enterprises registered on the Udyam Registration Portal and Udyam Assist Platform as of 28 February 2026, up from 0.79 crore at the end of FY2021–22.</p>
+          <div class="src">Source: Ministry of MSME, PIB release</div>
+        </div>
+        <div class="card">
+          <div class="big">1.59 L+</div><div class="cap">DPIIT-recognised startups</div>
+          <p style="margin-top:8px;font-size:14.5px;">Recognised startups grew from around 400–500 in 2016 to 1,59,157 as of 15 January 2025 — with 48% now emerging from Tier-2 and Tier-3 cities.</p>
+          <div class="src">Source: DPIIT / Startup India, Ministry of Commerce &amp; Industry</div>
+        </div>
+      </div>
+
+      <h3 style="font-size:20px;margin:56px 0 0;">New businesses formed in India, year by year</h3>
+      <p style="font-size:14.5px;color:var(--muted);margin-top:6px;">Three official measures, from narrowest to broadest.</p>
+      <div class="datatable">
+        <div class="dt-scroll">
+          <table>
+            <thead><tr><th>Financial year</th><th>New companies (MCA)</th><th>Udyam / MSME cumulative</th><th>DPIIT startups cumulative</th></tr></thead>
+            <tbody>
+              <tr><td>FY2018–19</td><td>1.24 lakh</td><td>—</td><td>—</td></tr>
+              <tr><td>FY2019–20</td><td>1.22 lakh</td><td>—</td><td>—</td></tr>
+              <tr><td>FY2020–21</td><td>1.55 lakh</td><td>Portal launched Jul 2020</td><td>—</td></tr>
+              <tr><td>FY2021–22</td><td>1.67 lakh</td><td>0.79 crore</td><td>72,993 <span style="color:var(--muted);font-size:12px;">(Jun 2022)</span></td></tr>
+              <tr><td>FY2022–23</td><td>1.65 lakh</td><td>1.64 crore</td><td>—</td></tr>
+              <tr><td>FY2023–24</td><td>1.85 lakh</td><td>4.12 crore</td><td>1,17,254 <span style="color:var(--muted);font-size:12px;">(Dec 2023)</span></td></tr>
+              <tr><td>FY2024–25</td><td>—</td><td>6.19 crore</td><td>1,59,157 <span style="color:var(--muted);font-size:12px;">(Jan 2025)</span></td></tr>
+              <tr><td>FY2025–26*</td><td>—</td><td>7.83 crore</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="footnote">*Udyam figure as of 28 February 2026. MCA figures are new company incorporations per financial year; Udyam and DPIIT figures are cumulative registrations, not annual additions. The Udyam jump after FY2022–23 partly reflects the Udyam Assist Platform (launched January 2023) bringing informal micro-enterprises into the formal count. Sources: <a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2246892&amp;reg=3&amp;lang=1" target="_blank" rel="noopener">PIB / Ministry of MSME</a>, <a href="https://www.startupindia.gov.in/" target="_blank" rel="noopener">Startup India (DPIIT)</a>, <a href="https://www.mca.gov.in/content/mca/global/en/data-and-reports/company-statistics/indian-foreign-companies-llps/total-companies-registered.html" target="_blank" rel="noopener">Ministry of Corporate Affairs</a>, <a href="https://www.investindia.gov.in/team-india-blogs/modernization-kirana-stores-india" target="_blank" rel="noopener">Invest India</a>. Kirana store counts are estimates — commonly cited between 12 and 20 million depending on methodology; 13 million is the most consistent figure.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Key metrics</span><h2 class="title">What we'll measure in the pilot</h2></div>
+      <div class="cards g4">
+        <div class="card"><h3 style="font-size:16px;">Supply</h3><p style="margin-top:8px;">Brands registered · Brands verified · Products listed</p></div>
+        <div class="card"><h3 style="font-size:16px;">Retailer</h3><p style="margin-top:8px;">Retailers registered · Active retailers · Boxes delivered</p></div>
+        <div class="card"><h3 style="font-size:16px;">Conversion</h3><p style="margin-top:8px;">Sample → Interest % · Interest → Order % · Order → Repeat %</p></div>
+        <div class="card"><h3 style="font-size:16px;">Commercial</h3><p style="margin-top:8px;">GMV · Average order value · Revenue per brand</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<div class="page" id="page-/about">
+  <section class="pagehead">
+    <div class="wrap">
+      <div class="crumb"><a href="#/">Home</a> / About</div>
+      <span class="eyebrow">About ShelfLeap</span>
+      <h1>Shelf space should go to the best product, not the biggest budget.</h1>
+      <p class="lede">ShelfLeap exists because India's most interesting new products and its most important retail channel have no reliable way to find each other.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="vm">
+        <div class="vmcard vision">
+          <div class="lbl">Our vision</div>
+          <h3>A country where any good product can reach a real shelf within 90 days of launch.</h3>
+          <p>We imagine an India where a founder in a micro-production unit in Ahmedabad has the same structured path to retail distribution as a national FMCG brand — and where every independent retailer can stock genuinely new products without gambling on them.</p>
+        </div>
+        <div class="vmcard mission">
+          <div class="lbl">Our mission</div>
+          <h3>Replace cold pitching and blind ordering with verified sampling and real feedback.</h3>
+          <p>We build the trust layer between indie brands and independent retailers: verifying who's real, matching who fits, moving the samples, capturing the feedback and closing the first B2B order — so both sides make decisions on evidence rather than on hope.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">What drives us</span><h2 class="title">Five things we hold to</h2></div>
+      <div class="values" style="grid-template-columns:repeat(3,1fr);">
+        <div class="value"><div class="num">01</div><h4>Evidence over intuition</h4><p>Every stocking decision on ShelfLeap should rest on a sample that was actually tested and feedback that was actually given.</p></div>
+        <div class="value"><div class="num">02</div><h4>The retailer's risk comes first</h4><p>Shelf space is a small retailer's scarcest asset. If we ever make it riskier to use, we've built the wrong product.</p></div>
+        <div class="value"><div class="num">03</div><h4>Verification is the product</h4><p>Anyone can build a listings page. The value is in knowing that the brand behind the listing is real and the numbers are honest.</p></div>
+        <div class="value"><div class="num">04</div><h4>Start manual, earn the automation</h4><p>No AI matching, no nationwide marketplace until the human version of the loop demonstrably works in one city.</p></div>
+        <div class="value"><div class="num">05</div><h4>Local before national</h4><p>Ahmedabad first, properly. A platform that works deeply in one city beats one that works thinly in twenty.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Our story</span><h2 class="title">Where the idea came from</h2></div>
+      <div style="max-width:760px;margin:38px auto 0;">
+        <p style="font-size:16.5px;">ShelfLeap started from a repeated observation: a founder spends eighteen months perfecting a product, then spends the next eighteen trying to get one store to try it. Meanwhile, the store owner two kilometres away is asked to stock unfamiliar products every week by people he has no way to evaluate — so he says no to almost all of them.</p>
+        <p style="font-size:16.5px;margin-top:16px;">Both sides are behaving rationally. The brand can't prove itself without shelf access, and the retailer can't risk shelf space on an unproven brand. It's a classic trust deadlock, and neither party can break it alone.</p>
+        <p style="font-size:16.5px;margin-top:16px;">ShelfLeap breaks it by inserting a low-cost trial step that didn't exist before — a verified, curated, pooled sampling box — and by turning the retailer's reaction into structured data the brand can actually act on.</p>
+      </div>
+
+      <div class="timeline" style="max-width:760px;margin:52px auto 0;">
+        <div class="tevent"><div class="yr">Stage 1 · Weeks 1–2</div><h5>Concept &amp; prototype</h5><p>User flows, wireframes and a high-fidelity clickable prototype covering all fifteen core screens.</p></div>
+        <div class="tevent"><div class="yr">Stage 2 · Weeks 3–5</div><h5>Onboarding &amp; admin</h5><p>Live brand and retailer registration forms, plus the admin console for verification and matching.</p></div>
+        <div class="tevent"><div class="yr">Stage 3 · Week 6</div><h5>First Innovation Box</h5><p>A physical box of about five products ships to selected retailers in Ahmedabad — the first real-world test.</p></div>
+        <div class="tevent"><div class="yr">Stage 4 · Weeks 7–8</div><h5>Feedback &amp; first orders</h5><p>Structured feedback comes back, and the first B2B orders and reorders validate the commercial loop.</p></div>
+        <div class="tevent"><div class="yr">Stage 5 · After pilot</div><h5>Automation &amp; scale</h5><p>Only once the loop is proven: automated matching, live payments, logistics integration and new cities.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Roadmap</span><h2 class="title">Eight weeks to one working loop</h2></div>
+      <div class="road">
+        <div class="rstep"><div class="bar"></div><div class="wk">Week 1–2</div><h5>Wireframes &amp; UI</h5><p>Validate the concept, then build a presentation-ready high-fidelity prototype.</p></div>
+        <div class="rstep"><div class="bar"></div><div class="wk">Week 3–4</div><h5>Clickable + forms</h5><p>Test with real users and start collecting brand and retailer sign-ups.</p></div>
+        <div class="rstep"><div class="bar"></div><div class="wk">Week 5–6</div><h5>Admin &amp; first box</h5><p>Verification and matching controls, then the first physical Innovation Box pilot.</p></div>
+        <div class="rstep"><div class="bar"></div><div class="wk">Week 7–8</div><h5>Feedback &amp; orders</h5><p>Validate the transaction: feedback → first B2B order → repeat order.</p></div>
+      </div>
+      <div class="cards g4" style="margin-top:30px;">
+        <div class="card"><h3 style="font-size:16px;">Supply</h3><p style="margin-top:8px;">10–20 indie &amp; NPD brands across healthy snacks, premium snacks, beverages and local innovation.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Retail</h3><p style="margin-top:8px;">20–30 independent retailers: premium kiranas, organic stores, cafés and specialty food stores.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Experiment</h3><p style="margin-top:8px;">One Innovation Box of ~5 products, distributed to selected retailers in Ahmedabad.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Measure</h3><p style="margin-top:8px;">Samples delivered → tested → positive feedback → interested → first orders → repeat orders.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="center"><span class="eyebrow">Not yet</span><h2 class="title">What we're deliberately not building</h2><p class="sub">Scope discipline is a feature. None of this gets built until the manual loop is proven in one city.</p></div>
+      <div class="cards g3">
+        <div class="card"><h3 style="font-size:16px;">AI recommendation engine</h3><p style="margin-top:8px;">Rules and manual approval first. Automate only what we've seen work by hand.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Live payment gateway</h3><p style="margin-top:8px;">Test checkout during the prototype. Split-settlement rails come once order volume is real.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Complex logistics API</h3><p style="margin-top:8px;">Box status is tracked manually through four stages until the volume justifies integration.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Mobile app</h3><p style="margin-top:8px;">A responsive web app reaches every retailer with a phone. Native comes later, if at all.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Advanced analytics</h3><p style="margin-top:8px;">Six honest metrics beat a dashboard of sixty nobody reads.</p></div>
+        <div class="card"><h3 style="font-size:16px;">Nationwide marketplace</h3><p style="margin-top:8px;">One city, deeply. Geographic expansion only after the loop is repeatable.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ JOIN ============ -->
+<div class="page" id="page-/join">
+  <section class="pagehead">
+    <div class="wrap">
+      <div class="crumb"><a href="#/">Home</a> / Join the pilot</div>
+      <span class="eyebrow">Get involved</span>
+      <h1>Join the first cohort.</h1>
+      <p class="lede">We're onboarding indie brands and independent retailers in Ahmedabad now. Tell us which side you're on and we'll be in touch with next steps.</p>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <div class="ctaband">
+        <div>
+          <h2>Ready to try before you commit shelf space?</h2>
+          <p>Brands get verified access to pre-qualified stores. Retailers get a free curated box of new products every month, with zero obligation to order.</p>
+          <div class="hero-note" style="color:rgba(255,255,255,.7);margin-top:26px;">
+            <span><i class="tick">✓</i> 10–20 brands</span>
+            <span><i class="tick">✓</i> 20–30 retailers</span>
+            <span><i class="tick">✓</i> Ahmedabad first</span>
+          </div>
+        </div>
+        <div class="formcard">
+          <form id="joinForm">
+            <div class="frow">
+              <label>I'm joining as a</label>
+              <div class="toggle">
+                <label class="sel" id="lbl-brand"><input type="radio" name="role" value="Brand" checked>Brand</label>
+                <label id="lbl-retailer"><input type="radio" name="role" value="Retailer">Retailer</label>
+              </div>
+            </div>
+            <div class="frow"><label for="jn">Name</label><input id="jn" type="text" required placeholder="Your full name"></div>
+            <div class="frow"><label for="jb">Brand / store name</label><input id="jb" type="text" placeholder="e.g. Aura Brew"></div>
+            <div class="frow"><label for="je">Email</label><input id="je" type="email" required placeholder="you@business.com"></div>
+            <div class="frow"><label for="jc">City</label><input id="jc" type="text" required placeholder="e.g. Ahmedabad"></div>
+            <div class="frow"><label for="jcat">Category</label>
+              <select id="jcat">
+                <option>Healthy snacks</option><option>Premium snacks</option><option>Beverages</option>
+                <option>Organic / clean label</option><option>Other local innovation</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Join the pilot</button>
+            <p class="formnote">Prototype demo — submissions aren't stored.</p>
+          </form>
+          <div class="success" id="joinOk">
+            <div class="ring">✓</div><h4>You're on the list</h4>
+            <p>We'll reach out with next steps for the pilot cohort.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a href="#/" class="brand"><span class="mark">S</span>ShelfLeap</a>
+        <p class="fabout">The Independent Retail Launchpad. Connecting indie brands with independent retailers through verified discovery, sampling and B2B ordering.</p>
+      </div>
+      <div><h6>Platform</h6><ul><li><a href="#/platform">Dashboards</a></li><li><a href="#/platform">Innovation Box</a></li><li><a href="#/platform">Matching engine</a></li><li><a href="#/platform">Commercials</a></li></ul></div>
+      <div><h6>For brands</h6><ul><li><a href="#/brands">How it works</a></li><li><a href="#/brands">Verification</a></li><li><a href="#/brands">Who it's for</a></li><li><a href="#/join">Submit your product</a></li></ul></div>
+      <div><h6>Company</h6><ul><li><a href="#/about">Vision &amp; mission</a></li><li><a href="#/about">Our story</a></li><li><a href="#/market">Market data</a></li><li><a href="#/join">Join the pilot</a></li></ul></div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 ShelfLeap. Prototype showcase.</span>
+      <span>Product data shown is illustrative. Market figures sourced from government publications.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var routes = ['/','/brands','/retailers','/platform','/market','/about','/join'];
+
+  function render(){
+    var hash = location.hash.replace(/^#/, '') || '/';
+    if (routes.indexOf(hash) === -1) hash = '/';
+    document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('show'); });
+    var el = document.getElementById('page-' + hash);
+    if (el) el.classList.add('show');
+    document.querySelectorAll('#navlinks a').forEach(function(a){
+      a.classList.toggle('on', a.dataset.r === hash);
+    });
+    document.getElementById('mobilemenu').classList.remove('open');
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange', render);
+  render();
+
+  var burger = document.getElementById('burger');
+  var mm = document.getElementById('mobilemenu');
+  burger.addEventListener('click', function(){ mm.classList.toggle('open'); });
+
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+      document.querySelectorAll('.panel').forEach(function(x){x.classList.remove('active');});
+      t.classList.add('active');
+      document.getElementById('p-' + t.dataset.p).classList.add('active');
+    });
+  });
+
+  var lb = document.getElementById('lbl-brand'), lr = document.getElementById('lbl-retailer');
+  if (lb && lr){
+    [lb, lr].forEach(function(l){
+      l.addEventListener('click', function(){
+        lb.classList.toggle('sel', l === lb);
+        lr.classList.toggle('sel', l === lr);
+      });
+    });
+  }
+
+  var f = document.getElementById('joinForm'), ok = document.getElementById('joinOk');
+  if (f) f.addEventListener('submit', function(e){
+    e.preventDefault(); f.classList.add('hide'); ok.classList.add('show');
+  });
+})();
+</script>
+</body>
+</html>
